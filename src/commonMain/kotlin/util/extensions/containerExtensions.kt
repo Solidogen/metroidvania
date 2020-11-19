@@ -3,13 +3,13 @@ package util.extensions
 import com.soywiz.korge.box2d.registerBodyWithFixture
 import com.soywiz.korge.scene.Scene
 import com.soywiz.korge.view.*
+import com.soywiz.korim.atlas.readAtlas
 import com.soywiz.korim.color.Colors
 import com.soywiz.korim.format.readBitmap
 import com.soywiz.korio.async.launch
 import com.soywiz.korio.file.std.resourcesVfs
 import org.jbox2d.dynamics.BodyType
-import util.utils.DOOR_PNG
-import util.utils.LocalSettingsCache
+import util.utils.*
 import kotlin.math.round
 
 suspend fun Container.addBackground(path: String) {
@@ -29,13 +29,27 @@ suspend fun Container.addBasicHud(scene: Scene, localSettingsCache: LocalSetting
     }
 }
 
-suspend fun Container.addDoor(playerSprite: Sprite, onDoorTouched: () -> Unit): Sprite {
+suspend fun Container.addDoor(playerSprite: Sprite, onTouched: () -> Unit): Sprite {
     return sprite(resourcesVfs[DOOR_PNG].readBitmap())
         .registerBodyWithFixture(type = BodyType.STATIC)
         .apply {
             addUpdater {
                 if (playerSprite.isTouching(this)) {
-                    onDoorTouched()
+                    onTouched()
+                }
+            }
+        }
+}
+
+suspend fun Container.addSkeleton(playerSprite: Sprite, onTouched: () -> Unit): Sprite {
+    val atlas = resourcesVfs[ATLAS_JSON].readAtlas()
+    val skeletonAnimation = atlas.getSpriteAnimation(SKELETON_MOVE_ANIM_PREFIX)
+    return sprite(skeletonAnimation)
+        .registerBodyWithFixture(type = BodyType.KINEMATIC)
+        .apply {
+            addUpdater {
+                if (playerSprite.isTouching(this)) {
+                    onTouched()
                 }
             }
         }

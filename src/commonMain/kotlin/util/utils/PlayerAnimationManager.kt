@@ -22,10 +22,10 @@ class PlayerAnimationManager {
 
     suspend fun init() {
         val atlas = resourcesVfs[ATLAS_JSON].readAtlas()
-        runAnimation = atlas.getSpriteAnimation("hero-run")
-        jumpAnimation = atlas.getSpriteAnimation("hero-jump")
-        idleAnimation = atlas.getSpriteAnimation("hero-idle")
-        attackAnimation = atlas.getSpriteAnimation("hero-attack")
+        runAnimation = atlas.getSpriteAnimation(HERO_RUN_ANIM_PREFIX)
+        jumpAnimation = atlas.getSpriteAnimation(HERO_JUMP_ANIM_PREFIX)
+        idleAnimation = atlas.getSpriteAnimation(HERO_IDLE_ANIM_PREFIX)
+        attackAnimation = atlas.getSpriteAnimation(HERO_ATTACK_ANIM_PREFIX)
     }
 
     fun playRunAnimation() {

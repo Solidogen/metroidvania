@@ -31,12 +31,12 @@ class SecondScene : BaseScene() {
     }
 
     private suspend fun Container.addDoors() {
-        addDoor(playerSprite = playerSprite, onDoorTouched = {
+        addDoor(playerSprite = playerSprite, onTouched = {
             launchImmediately {
                 sceneContainer.pushTo<FirstScene>()
             }
         }).alignLeftToLeftOf(floorBottom).alignBottomToTopOf(floorBottom)
-        addDoor(playerSprite = playerSprite, onDoorTouched = {
+        addDoor(playerSprite = playerSprite, onTouched = {
             launchImmediately {
                 sceneContainer.pushTo<ThirdScene>()
             }

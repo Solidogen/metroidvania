@@ -7,6 +7,7 @@ import com.soywiz.korio.async.launchImmediately
 import org.jbox2d.dynamics.BodyType
 import ui.scenes.base.BaseScene
 import util.extensions.addDoor
+import util.extensions.addSkeleton
 import util.utils.GAME_WINDOW_WIDTH
 import util.utils.SUNSET_BG
 import util.utils.asGround
@@ -21,6 +22,7 @@ class FirstScene : BaseScene() {
         addFloor()
         playerSprite.alignBottomToTopOf(floorBottom).alignX(floorBottom, 0.5, true, 0.0)
         addDoors()
+        addEnemies()
     }
 
     private suspend fun Container.addFloor() {
@@ -31,10 +33,18 @@ class FirstScene : BaseScene() {
     }
 
     private suspend fun Container.addDoors() {
-        addDoor(playerSprite = playerSprite, onDoorTouched = {
+        addDoor(playerSprite = playerSprite, onTouched = {
             launchImmediately {
                 sceneContainer.pushTo<SecondScene>()
             }
         }).alignRightToRightOf(floorBottom).alignBottomToTopOf(floorBottom)
+    }
+
+    private suspend fun Container.addEnemies() {
+        addSkeleton(playerSprite = playerSprite, onTouched = {
+            launchImmediately {
+                playerStatisticsManager?.receiveHit()
+            }
+        }).alignBottomToTopOf(floorBottom).alignX(floorBottom, 0.2, true, 0.0)
     }
 }

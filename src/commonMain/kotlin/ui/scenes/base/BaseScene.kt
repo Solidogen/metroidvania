@@ -3,8 +3,6 @@ package ui.scenes.base
 import com.soywiz.korge.box2d.body
 import com.soywiz.korge.scene.Scene
 import com.soywiz.korge.view.*
-import com.soywiz.korim.format.readBitmap
-import com.soywiz.korio.file.std.resourcesVfs
 import util.extensions.addBackground
 import util.extensions.addBasicHud
 import util.extensions.localSettingsCache
@@ -23,6 +21,9 @@ abstract class BaseScene : Scene() {
     private var container: Container? = null
     private var _playerSprite: Sprite? = null
 
+    var playerStatisticsManager: PlayerStatisticsManager? = null
+        private set
+
     val playerSprite
         get() = _playerSprite!!
     val playerBody
@@ -38,6 +39,7 @@ abstract class BaseScene : Scene() {
         animationManager.init()
         playerAnimationManager = animationManager
         playerMovementManager = PlayerMovementManager(animationManager)
+        playerStatisticsManager = PlayerStatisticsManager()
 
         addBackground(backgroundPath)
 
@@ -53,6 +55,7 @@ abstract class BaseScene : Scene() {
     final override suspend fun sceneBeforeLeaving() {
         playerMovementManager = null
         playerAnimationManager = null
+        playerStatisticsManager = null
         container?.removeChildren()
         _playerSprite = null
         container = null

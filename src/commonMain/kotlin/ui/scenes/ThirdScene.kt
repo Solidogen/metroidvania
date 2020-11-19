@@ -31,7 +31,7 @@ class ThirdScene : BaseScene() {
     }
 
     private suspend fun Container.addDoors() {
-        addDoor(playerSprite = playerSprite, onDoorTouched = {
+        addDoor(playerSprite = playerSprite, onTouched = {
             launchImmediately {
                 sceneContainer.pushTo<SecondScene>()
             }

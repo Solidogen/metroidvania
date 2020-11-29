@@ -1,13 +1,10 @@
 package modules
 
-import com.soywiz.korau.sound.PlaybackTimes
-import com.soywiz.korau.sound.readMusic
 import com.soywiz.korge.scene.Module
 import com.soywiz.korge.scene.Scene
 import com.soywiz.korim.color.Colors
 import com.soywiz.korim.color.RGBA
 import com.soywiz.korinject.AsyncInjector
-import com.soywiz.korio.file.std.resourcesVfs
 import com.soywiz.korma.geom.ScaleMode
 import com.soywiz.korma.geom.SizeInt
 import ui.scenes.FirstScene
@@ -27,16 +24,6 @@ object MainModule : Module() {
 
     // todo pass DI to extension with ui/logic separation
     override suspend fun AsyncInjector.configure() {
-        mapInstance(
-            // fixme
-            SoundManager(
-                resourcesVfs[MUSIC_WAV]
-                    .readMusic()
-                    .play(PlaybackTimes.ZERO).apply {
-                        volume = 0.02
-                    }
-            )
-        )
         mapPrototype { FirstScene() }
         mapPrototype { SecondScene() }
         mapPrototype { ThirdScene() }

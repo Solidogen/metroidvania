@@ -1,6 +1,5 @@
 package util.utils
 
-const val MUSIC_WAV = "music\\music.wav"
 const val ATLAS_JSON = "gothicvania\\demo\\assets\\atlas\\atlas.json"
 const val SUNSET_BG = "bg_sunset.jpg"
 const val LAVA_BG = "bg_lava.jpg"

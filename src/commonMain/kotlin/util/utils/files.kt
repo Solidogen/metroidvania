@@ -1,6 +1,6 @@
 package util.utils
 
-const val ATLAS_JSON = "gothicvania\\demo\\assets\\atlas\\atlas.json"
+const val ATLAS_JSON = "atlas\\atlas.json"
 const val SUNSET_BG = "bg_sunset.jpg"
 const val LAVA_BG = "bg_lava.jpg"
 const val FOREST_BG = "bg_forest.png"

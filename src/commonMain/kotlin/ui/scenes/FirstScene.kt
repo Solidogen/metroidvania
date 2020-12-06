@@ -44,7 +44,7 @@ class FirstScene : BaseScene() {
     private suspend fun Container.addEnemies() {
         addSkeleton(playerSprite = playerSprite, onTouched = {
             launchImmediately {
-                playerStatisticsManager?.receiveHit()
+                playerStatisticsManager?.receiveHit(this)
             }
         }).alignBottomToTopOf(floorBottom).alignX(floorBottom, 0.2, true, 0.0)
     }

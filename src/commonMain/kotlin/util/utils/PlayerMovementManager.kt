@@ -69,7 +69,7 @@ class PlayerMovementManager(
                 /* isTouchingDescendablePlatform(playerSprite)*/
                 // todo drop down from one-way platform OR crouch
             }
-            if (keys.justPressed(Key.A)) {
+            if (keys.justPressed(Key.SPACE)) {
                 if (attackState == AttackState.None) {
                     attackState = AttackState.NeedsToAttack
                 }

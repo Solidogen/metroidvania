@@ -33,6 +33,7 @@ abstract class BaseScene : Scene() {
 
     // todo refactor
     final override suspend fun Container.sceneInit() {
+        println("SCENE INIT")
         container = this
 
         val animationManager = PlayerAnimationManager()
@@ -43,7 +44,9 @@ abstract class BaseScene : Scene() {
 
         addBackground(backgroundPath)
 
-        val sprite = sprite(animationManager.idleAnimation)
+        val sprite = sprite(animationManager.idleAnimation) {
+            name = "Player"
+        }
         _playerSprite = sprite
         animationManager.playerSprite = sprite
 
@@ -53,6 +56,7 @@ abstract class BaseScene : Scene() {
     }
 
     final override suspend fun sceneBeforeLeaving() {
+        println("SCENE LEAVING")
         playerMovementManager = null
         playerAnimationManager = null
         playerStatisticsManager = null

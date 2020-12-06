@@ -13,13 +13,16 @@ import util.utils.*
 import kotlin.math.round
 
 suspend fun Container.addBackground(path: String) {
-    image(resourcesVfs[path].readBitmap())
+    image(resourcesVfs[path].readBitmap()).apply {
+        name = "Background"
+    }
 }
 
 suspend fun Container.addBasicHud(scene: Scene, localSettingsCache: LocalSettingsCache) {
     val experience = text(text = "") {
         textSize = 20.0
         color = Colors.BLUEVIOLET
+        name = "Experience"
     }.alignTopToTopOf(this, 20).alignLeftToLeftOf(this, 20)
     experience.addUpdater {
         scene.launch {
@@ -38,6 +41,7 @@ suspend fun Container.addDoor(playerSprite: Sprite, onTouched: () -> Unit): Spri
                     onTouched()
                 }
             }
+            name = "Door"
         }
 }
 
@@ -52,6 +56,7 @@ suspend fun Container.addSkeleton(playerSprite: Sprite, onTouched: () -> Unit): 
                     onTouched()
                 }
             }
+            name = "Skeleton"
         }
 }
 

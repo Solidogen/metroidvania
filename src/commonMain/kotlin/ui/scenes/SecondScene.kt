@@ -27,7 +27,9 @@ class SecondScene : BaseScene() {
         floorBottom = solidRect(GAME_WINDOW_WIDTH, 50, Colors.AQUAMARINE)
             .registerBodyWithFixture(type = BodyType.STATIC)
             .alignBottomToBottomOf(this)
-            .asGround()
+            .asGround().apply {
+                name = "Floor"
+            }
     }
 
     private suspend fun Container.addDoors() {

@@ -30,6 +30,7 @@ class FirstScene : BaseScene() {
             .registerBodyWithFixture(type = BodyType.STATIC)
             .alignBottomToBottomOf(this)
             .asGround()
+        floorBottom.name = "Floor"
     }
 
     private suspend fun Container.addDoors() {
